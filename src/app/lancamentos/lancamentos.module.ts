@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
@@ -41,6 +42,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     MessagesModule,
 
     CurrencyMaskModule,
+
+    SharedModule
   ],
   exports: [
     LancamentoCadastroComponent,
