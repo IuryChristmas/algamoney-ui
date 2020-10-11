@@ -1,3 +1,4 @@
+import { LancamentoFilter } from './../../filter/lancamento-filter';
 import { LancamentoService } from './../lancamento.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class LancamentosPesquisaComponent implements OnInit {
 
   lancamentos = [];
+  filtro = new LancamentoFilter();
+  totalElements = 0;
 
   constructor(private lancamentoService: LancamentoService) {}
 
@@ -17,7 +20,13 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   pesquisar() {
-    console.log(this.lancamentoService.pesquisar());
+    this.lancamentoService.pesquisar(this.filtro)
+      .subscribe(res => {
+        this.lancamentos = res.content;
+        this.totalElements = res.totalElements;
+        this.filtro.pagina = res.number;
+        this.filtro.itensPorPagina = res.size;
+      });
   }
 
 }
