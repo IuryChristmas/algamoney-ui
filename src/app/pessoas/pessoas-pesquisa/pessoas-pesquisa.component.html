@@ -1,18 +1,48 @@
 <div class="container">
   <div class="ui-g">
-    <div class="ui-g-12">
-      <h1>Pessoas</h1>
-    </div>
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <div class="ui-g-12">
+        <h1>Pessoas</h1>
+      </div>
 
-    <div class="ui-g-12 ui-fluid">
-      <label>Nome</label>
-      <input type="text" pInputText >
-    </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input type="text" pInputText name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar" ></button>
+      </div>
+    </form>
   </div>
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <app-pessoas-grid [pessoas]="pessoas" ></app-pessoas-grid>
+      <p-table [value]="pessoas" [paginator]="true" [rows]="5" [responsive]="true" [rows]="filtro.itensPorPagina"
+      [totalRecords]="totalElements" [responsive]="true" [lazy]="true" (onLazyLoad)="aoMudarPagina($event)"
+      emptyMessage="Nenhum lançamento encontrado">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Nome</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Status</th>
+              <th [ngClass]="'col-acoes'"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pessoa>
+          <tr>
+            <td>{{pessoa.nome}}</td>
+            <td>{{pessoa.cidade}}</td>
+            <td>{{pessoa.estado}}</td>
+            <td>{{pessoa.status === true ? 'Ativo' : 'Inativo'}}</td>
+            <td [ngClass]="'col-acoes'">
+              <button pButton icon="pi pi-pencil" style="margin-right: .5em" pTooltip="Editar" tooltipPosition="top"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
     <div class="ui-g-12">

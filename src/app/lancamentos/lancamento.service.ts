@@ -34,8 +34,19 @@ export class LancamentoService {
     params = params.set('size', filtro.itensPorPagina.toString());
 
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers: head, params })
-    .pipe(
-      map((res: any) => res)
-    );
+      .pipe(
+        map((res: any) => res)
+      );
+  }
+
+  excluir(codigo: number): Observable<void> {
+    const head = new HttpHeaders();
+
+    head.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers: head})
+      .pipe(
+        map((res: any) => res)
+      );
   }
 }
