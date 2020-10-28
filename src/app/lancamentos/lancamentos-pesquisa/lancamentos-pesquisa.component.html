@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="container">
   <div class="ui-g">
     <form autocomplete="off" (ngSubmit)="pesquisar()">
@@ -55,7 +57,7 @@
             <td [ngClass]="'col-acoes'">
               <button pButton icon="pi pi-pencil" style="margin-right: .5em" pTooltip="Editar" tooltipPosition="top"></button>
               <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
-                (click)="excluir(lancamento)"></button>
+                (click)="confirmarExclusao(lancamento)"></button>
             </td>
           </tr>
         </ng-template>
